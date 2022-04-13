@@ -106,6 +106,7 @@ int main()
     Model tv((char*)"Models/tv/tv.obj");
     Model sofa((char*)"Models/sofa/sofa.obj");
     Model table((char*)"Models/table/table.obj");
+    Model cocina((char*)"Models/cocina/cocina.obj");
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
 
     GLfloat vertices[] =
@@ -228,6 +229,12 @@ int main()
         model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         table.Draw(shader);
+
+        model = glm::mat4(1);
+        model = glm::translate(model, glm::vec3(8.0f, 0.0f, 3.0f));
+        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        cocina.Draw(shader);
         glBindVertexArray(0);
 
         glActiveTexture(GL_TEXTURE0);

@@ -21,7 +21,7 @@
 
 
 // Properties
-const GLuint WIDTH = 800, HEIGHT = 600;
+const GLuint WIDTH = 1200, HEIGHT = 800;
 int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 // Function prototypes
@@ -57,7 +57,7 @@ int main()
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
     // Create a GLFWwindow object that we can use for GLFW's functions
-    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Practica 7", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Proyecto final", nullptr, nullptr);
 
     if (nullptr == window)
     {
@@ -101,12 +101,19 @@ int main()
 
 
     // Load models
-    Model Pizza((char*)"Models/Pizza/PizzaSteve.obj");
-    Model brader((char*)"Models/Pizza/brader.obj");
     Model tv((char*)"Models/tv/tv.obj");
     Model sofa((char*)"Models/sofa/sofa.obj");
     Model table((char*)"Models/table/table.obj");
     Model cocina((char*)"Models/cocina/cocina.obj");
+    Model agua((char*)"Models/pecera/agua.obj");
+    Model base((char*)"Models/pecera/base.obj");
+    Model pez1((char*)"Models/pecera/pez1.obj");
+    Model pez2((char*)"Models/pecera/pez2.obj");
+    Model vidrio((char*)"Models/pecera/vidrio.obj");
+    Model bocina((char*)"Models/bocina/bocina.obj");
+    Model computadora((char*)"Models/computadora/computadora.obj");
+    Model torre((char*)"Models/torre/torre.obj");
+    Model ventanas((char*)"Models/torre/ventanas.obj");
     glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
 
     GLfloat vertices[] =
@@ -203,7 +210,7 @@ int main()
 
         // Draw the loaded model
         glm::mat4 model(1);
-        model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        //model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         //glDrawElements(GL_TRIANGLES, 6, GL_FLAT, 0);
         //Pizza.Draw(shader);
@@ -219,22 +226,77 @@ int main()
         sofa.Draw(shader);
 
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(1.0f, 0.0f, -15.0f));
-        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        //model = glm::translate(model, glm::vec3(1.0f, 3.0f, -20.0f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         tv.Draw(shader);
 
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 3.0f));
-        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        //model = glm::translate(model, glm::vec3(1.0f, 0.1f, -8.0f));
+        //model = glm::rotate(model, glm::radians(-180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        computadora.Draw(shader);
+
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 3.0f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         table.Draw(shader);
 
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(8.0f, 0.0f, 3.0f));
-        model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        //model = glm::translate(model, glm::vec3(8.0f, 0.0f, 3.0f));
+        //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         cocina.Draw(shader);
+
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(15.0f, 1.4f, 4.3f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        agua.Draw(shader);
+
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(18.45f, 1.4f, 4.3f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        vidrio.Draw(shader);
+
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(15.0f, 1.4f, 4.3f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        base.Draw(shader);
+
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(15.0f, 1.5f, 4.1f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pez1.Draw(shader);
+
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(15.0f, 1.4f, 4.5f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        pez2.Draw(shader);
+
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(15.0f, 0.6f, -1.0f));
+        //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        bocina.Draw(shader);
+
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(0.0f, -3.0f, 0.0f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        torre.Draw(shader);
+
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(0.0f, -3.0f, 0.0f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        ventanas.Draw(shader);
+
         glBindVertexArray(0);
 
         glActiveTexture(GL_TEXTURE0);
@@ -245,6 +307,7 @@ int main()
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glBindVertexArray(VAO);
+
         //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
 

@@ -15,8 +15,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="316141488_ProyectoFinal_GPO12.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Camera.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\lighting.frag">
+      <Filter>Archivos de encabezado</Filter>
+    </None>
+    <None Include="Shaders\lighting.vs">
+      <Filter>Archivos de encabezado</Filter>
+    </None>
+    <None Include="Shaders\anim.frag">
+      <Filter>Archivos de encabezado</Filter>
+    </None>
+    <None Include="Shaders\anim.vs">
+      <Filter>Archivos de encabezado</Filter>
+    </None>
+    <None Include="Shaders\anim2.frag">
+      <Filter>Archivos de encabezado</Filter>
+    </None>
+    <None Include="Shaders\anim2.vs">
+      <Filter>Archivos de encabezado</Filter>
+    </None>
   </ItemGroup>
 </Project>

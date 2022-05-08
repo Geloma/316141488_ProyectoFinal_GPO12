@@ -248,7 +248,14 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-map_Kd pantalla.png
+map_Kd emergencia.png
+Ni 1.00
+newmtl lambert12SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd rojo.png
 Ni 1.00
 newmtl pez1:___Default
 illum 4
@@ -330,6 +337,35 @@ Ni 1.00
 Ks 0.00 0.00 0.00
 map_Ks grisclaro.png
 Ns 18.00
+newmtl phong7SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd reflejo.png
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong8SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd fondo.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks fondo.png
+Ns 18.00
+newmtl phong10SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd tv.png
+Ni 1.00
+Ks 0.00 0.00 0.00
+map_Ks tv.png
+Ns 18.00
 newmtl sofa:lambert2SG
 illum 4
 Kd 0.00 0.00 0.00
@@ -356,13 +392,6 @@ illum 4
 Kd 0.50 0.50 0.50
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
-Ni 1.00
-newmtl tv:lambert2SG
-illum 4
-Kd 0.00 0.00 0.00
-Ka 0.00 0.00 0.00
-Tf 1.00 1.00 1.00
-map_Kd tv.png
 Ni 1.00
 newmtl tv:lambert4SG
 illum 4

@@ -40,8 +40,10 @@ bool firstMouse = true;
 
 float rot = 0.0f;
 float rotem = 0.0f;
+float rotna = 0.0f;
 float aumento = 0.0f;
 float distancia = 0.0f;
+float distancia2 = 0.0f;
 bool active,active2;
 glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
 float px = 0, py = 0, pz = 0, dx = 0, dy = 0, dz = 0;
@@ -200,7 +202,7 @@ int main()
     Model computadora((char*)"Models/computadora/computadora.obj");
     Model torre((char*)"Models/torre/torre.obj");
     Model ventanas((char*)"Models/torre/ventanas.obj");
-    glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(camera.GetZoom(), (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT, 0.1f, 1000.0f);
 
     // First, set the container's VAO (and VBO)
     GLuint VBO, VAO, EBO;
@@ -402,6 +404,7 @@ int main()
         model = glm::mat4(1);
         //model = glm::translate(model, glm::vec3(1.0f, 3.0f, -20.0f));
         //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, rotna));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         nave.Draw(shader);
 
@@ -453,31 +456,31 @@ int main()
         //glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         //reflect.Draw(shader);
 
-        //model = glm::mat4(1);
-        ////model = glm::translate(model, glm::vec3(15.0f, 1.5f, 4.1f));
-        ////model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-        //model = glm::rotate(model, glm::radians(rot), glm::vec3(1.0f, 1.0f, 1.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //colapez1.Draw(shader);
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(15.0f, 1.5f, 4.1f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, distancia));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        colapez1.Draw(shader);
 
-        //model = glm::mat4(1);
-        ////model = glm::translate(model, glm::vec3(15.0f, 1.4f, 4.5f));
-        ////model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-        //model = glm::rotate(model, glm::radians(rot), glm::vec3(1.0f, 1.0f, 1.0f));
-        //glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        //colapez2.Draw(shader);
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(15.0f, 1.4f, 4.5f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, distancia2));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        colapez2.Draw(shader);
 
         model = glm::mat4(1);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, distancia));
-        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        //model = glm::rotate(model, glm::radians(rot), glm::vec3(1.0f, 0.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        pez1.Draw(shader);
+        cpez1.Draw(shader);
 
         model = glm::mat4(1);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, distancia));
-        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, distancia2));
+        //model = glm::rotate(model, glm::radians(rot), glm::vec3(1.0f, 0.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        pez2.Draw(shader);
+        cpez2.Draw(shader);
 
         model = glm::mat4(1);
         //model = glm::translate(model, glm::vec3(15.0f, 0.6f, -1.0f));
@@ -498,17 +501,24 @@ int main()
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         torre.Draw(shader);
 
-
-        glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         model = glm::mat4(1);
         //model = glm::translate(model, glm::vec3(0.0f, -3.0f, 0.0f));
         //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        ventanas.Draw(shader);
+
+        glEnable(GL_BLEND);//Avtiva la funcionalidad para trabajar el canal alfa
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        model = glm::mat4(1);
+        //model = glm::translate(model, glm::vec3(18.45f, 1.4f, 4.3f));
+        //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(lightingShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         glUniform1f(glGetUniformLocation(lightingShader.Program, "activaTransparencia"), 0);
-        glUniform4f(glGetUniformLocation(lightingShader.Program, "coloralpha"), 1.0f, 1.0f, 1.0f, 0.85f);
-        ventanas.Draw(lightingShader);
-        glUniform4f(glGetUniformLocation(lightingShader.Program, "coloralpha"), 1.0f, 1.0f, 1.0f, 1.0f);
+        glUniform4f(glGetUniformLocation(lightingShader.Program, "coloralpha"), 1.0f, 1.0f, 1.0f, 0.15f);
+        vidrio.Draw(shader);
+        glUniform4f(glGetUniformLocation(lightingShader.Program, "coloralpha"), 1.0f, 1.0f, 1.0f, 0.15f);
+
         glDisable(GL_BLEND);  //Desactiva el canal alfa 
         glBindVertexArray(0);
 
@@ -639,8 +649,10 @@ void nadar()
     {
         if (recorrido1)
         {
-            distancia+= 0.002f;
-            if (distancia >= 0.02)
+            distancia -= 0.01f;
+            distancia2 += 0.01f;
+            //rot = 180.0f;
+            if (distancia <= -1.4)
             {
                 recorrido1 = false;
                 recorrido2 = true;
@@ -649,8 +661,10 @@ void nadar()
         if (recorrido2)
         {
             //rotKit = 90;
-            distancia -= 0.002f;
-            if (distancia <= -1.4)
+            distancia += 0.01f;
+            distancia2 -= 0.01f;
+            rot = 180.0f;
+            if (distancia >= 0.0)
             {
                 recorrido2 = false;
                 recorrido3 = true;
@@ -661,9 +675,10 @@ void nadar()
         if (recorrido3)
         {
             //rotKit = 180;
-            distancia += 0.002f;
-
-            if (distancia >= 0.02)
+            distancia -= 0.01f;
+            distancia2 += 0.01f;
+            rot = 0.0f;
+            if (distancia <= -1.4)
             {
                 recorrido3 = false;
                 recorrido4 = true;
@@ -675,8 +690,10 @@ void nadar()
             /*rotKit = 315;
             movKitX -= 0.1f;
             movKitZ += 0.1f;*/
-            distancia -= 0.002f;
-            if (distancia <= -1.4)
+            distancia += 0.01f;
+            distancia2 -= 0.01f;
+            rot = 180.0f;
+            if (distancia >= 0.0)
             {
                 recorrido4 = false;
                 recorrido1 = true;
@@ -736,7 +753,8 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
         active = !active;
         if (active)
         {
-            rotem = -0.02;
+            rotem = -0.1;
+            rotna = 0.3;
             Light1 = glm::vec3(1.0f, 0.0f, 0.0f);
             //Light2 = glm::vec3(1.0f, 1.0f, 0.0f);
             //Light3 = glm::vec3(1.0f, 1.0f, 0.0f);
@@ -746,6 +764,7 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
         else
         {
             rotem = 0.0f;
+            rotna = 0.0f;
             Light1 = glm::vec3(0);//Cuado es solo un valor en los 3 vectores pueden dejar solo una componente
             /*Light2 = glm::vec3(0);
             Light3 = glm::vec3(0);

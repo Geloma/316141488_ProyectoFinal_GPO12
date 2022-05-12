@@ -1,3 +1,12 @@
+/**
+ * @file   316141488_ProyectoFinal_GPO12.cpp
+ * @Author Genaro López Martínez
+ * @date   11/05/2022
+ * @brief  Final project to show the theorical and practical topics from the course
+ *
+ * This file has the models from the proposed model to animate in 3D with OpenGL 
+ * Also there are 7 objects with 5 animtaions into the context from the model
+ */
 // Std. Includes
 #include <string>
 
@@ -38,16 +47,18 @@ GLfloat lastX = WIDTH / 2.0;
 GLfloat lastY = HEIGHT / 2.0;
 bool firstMouse = true;
 
+//variables to rotate or translate as a nimation some objects
 float rot = 0.0f;
 float rotem = 0.0f;
 float rotna = 0.0f;
 float aumento = 0.0f;
 float distancia = 0.0f;
 float distancia2 = 0.0f;
-bool active,active2;
+bool active, active2;
 glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
 float px = 0, py = 0, pz = 0, dx = 0, dy = 0, dz = 0;
 
+// variables to use as flags or conditions to activate or disactivate some conditional to make a process
 bool bocinas = false;
 
 bool circuito = false;
@@ -61,6 +72,8 @@ bool recorrido7 = false;
 float tiempo;
 
 // Positions of the point lights
+/*<summary> an array which initialize 
+* the point lights positions </summary>*/
 glm::vec3 pointLightPositions[] = {
     glm::vec3(0.0f,16.0f, 0.0f),
     glm::vec3(-11.0f,1.3f, -7.7f),
@@ -68,6 +81,8 @@ glm::vec3 pointLightPositions[] = {
     glm::vec3(11.5f,0.0f, 11.5f)
 };
 
+/*<summary> an array which initialize
+* the faces from the object </summary>*/
 float vertices[] = {
      -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
         0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -122,8 +137,13 @@ glm::vec3 Light4 = glm::vec3(0);
 // Deltatime
 GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
 GLfloat lastFrame = 0.0f;  	// Time of last frame
+
+/*<summary> Main function where ypu can see all the 
+usage from every variable and procedures with the models </summary>
+<returns> return a 0 as execution completed correctly </returns>*/
 int main()
 {
+    //<code>
     // Init GLFW
     glfwInit();
     // Set all the required options for GLFW
@@ -274,6 +294,7 @@ int main()
         DoMovement();
         nadar();
         musica();
+        
 
         // Clear the colorbuffer
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -459,14 +480,18 @@ int main()
         model = glm::mat4(1);
         //model = glm::translate(model, glm::vec3(15.0f, 1.5f, 4.1f));
         //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        //model = glm::rotate(model, glm::radians(rot), glm::vec3(1.0f, 1.0f, 1.0f));
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, distancia));
+        //model = glm::rotate(model, glm::radians(rot), glm::vec3(1.0f, 1.0f, 1.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         colapez1.Draw(shader);
 
         model = glm::mat4(1);
         //model = glm::translate(model, glm::vec3(15.0f, 1.4f, 4.5f));
         //model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+        //model = glm::rotate(model, glm::radians(rot), glm::vec3(1.0f, 1.0f, 1.0f));
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, distancia2));
+        //model = glm::rotate(model, glm::radians(rot), glm::vec3(1.0f, 1.0f, 1.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         colapez2.Draw(shader);
 
@@ -490,7 +515,7 @@ int main()
 
         model = glm::mat4(1);
         //model = glm::translate(model, glm::vec3(-5.0f, 0.0f, 0.0f));
-        model = glm::translate(model, glm::vec3(aumento,aumento,0.0f));
+        model = glm::translate(model, glm::vec3(aumento, aumento, 0.0f));
         //model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
         speakers.Draw(shader);
@@ -569,7 +594,7 @@ int main()
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
         glUniform1f(glGetUniformLocation(anim.Program, "time"), tiempo);
         reflect.Draw(anim);
-        
+
         anim2.Use();
         tiempo = glfwGetTime();
         modelLoc = glGetUniformLocation(anim2.Program, "model");
@@ -596,10 +621,13 @@ int main()
 
     glfwTerminate();
     return 0;
+    //<code>
 }
 
 
 // Moves/alters the camera positions based on user input
+/*<summary> function that manage the camera positions and 
+the boolean variables to activate other animations </summary>*/
 void DoMovement()
 {
     // Camera controls
@@ -637,10 +665,13 @@ void DoMovement()
     }
     if (keys[GLFW_KEY_N])
     {
-        bocinas= false;
+        bocinas = false;
     }
 }
 
+/*<summary> function with an if conditional to increment or
+decrement the values from float variables to translate the object 
+and appear is swimming in constant time </summary>*/
 void nadar()
 {
 
@@ -702,6 +733,9 @@ void nadar()
     }
 }
 
+/*<summary> function with an if conditional to increment or
+decrement the values from float variables to translate the object
+and appear is playing music through the speakers in constant time </summary>*/
 void musica() {
 
     if (bocinas)
@@ -729,6 +763,9 @@ void musica() {
     }
 }
 // Is called whenever a key is pressed/released via GLFW
+/*<summary> function with if conditionals to check if a key was pressed 
+to activate the boolean variable and to change the value from 
+other variables. It depends from which key you pressed to activate the proper process.</summary>*/
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
     if (GLFW_KEY_ESCAPE == key && GLFW_PRESS == action)
@@ -776,20 +813,25 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
         active2 = !active2;
         if (active2)
         {
-            
+
             Light2 = glm::vec3(1.0f, 1.0f, 0.0f);
-            
+
         }
         else
         {
-            
+
             Light2 = glm::vec3(0);
-            
+
         }
     }
 
 }
 
+/*<summary> function with an if conditional to initialize the camera sight 
+with the mouse, if you rotate the mouse, the sight will follow the mouse.</summary>
+<param> window: where the mouse with the sight will take effect. </param>
+<param> xPos: variable as reference to calculate the position from x. </param>
+<param> yPos: variable as reference to calculate the position from y. </param>*/
 void MouseCallback(GLFWwindow* window, double xPos, double yPos)
 {
     if (firstMouse)
